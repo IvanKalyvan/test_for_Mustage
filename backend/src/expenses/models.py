@@ -8,7 +8,7 @@ from src.database import metadata
 
 Expenses = Table(
 
-    "User",
+    "Expenses",
     metadata,
     Column("id", BigInteger, primary_key=True, autoincrement=True),
     Column("inUAH", Numeric(10, 2), nullable=False),
