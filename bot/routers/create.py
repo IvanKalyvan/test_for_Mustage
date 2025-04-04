@@ -9,7 +9,7 @@ router = Router()
 
 @router.message(F.text == "Додати статтю витрат")
 async def create_expense(message: Message, state: FSMContext):
-
+    await state.clear()
     await message.answer("Enter expense title")
     await state.set_state(ExpenseForm.title)
 

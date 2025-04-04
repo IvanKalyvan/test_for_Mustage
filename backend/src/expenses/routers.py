@@ -29,10 +29,10 @@ async def add_expense(expense: ExpenseCreate, db_session: AsyncSession = Depends
     db_expense = await create_expense(db_session, expense)
     return db_expense
 
-@expenses.delete("/{expense_id}")
-async def remove_expense(expense_id: int, db_session: AsyncSession = Depends(get_session)):
+@expenses.delete("/")
+async def remove_expense(id: int, db_session: AsyncSession = Depends(get_session)):
 
-    db_expense = await delete_expense(db_session, expense_id)
+    db_expense = await delete_expense(db_session, id)
 
     return db_expense
 

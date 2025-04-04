@@ -21,3 +21,11 @@ async def get_expenses(endpoint, data):
         response = await session.get(api_url+endpoint, params=data)
 
         return response
+
+async def delete_expenses(endpoint, id):
+
+    async for session in init():
+
+        response = await session.delete(api_url+endpoint, params=id)
+
+        return response

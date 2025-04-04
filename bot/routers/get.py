@@ -27,12 +27,18 @@ async def end_expense(message: Message, state: FSMContext):
     await state.update_data(end_date=message.text)
     data_for_mailing = await state.get_data()
     response = await get_expenses("/expenses", data_for_mailing)
-    file_bytes = await response.read()
-    file_data = io.BytesIO(file_bytes)
+    if response.status == 200:
 
-    file_data.seek(0)
+        file_bytes = await response.read()
+        file_data = io.BytesIO(file_bytes)
 
-    document = BufferedInputFile(file_data.getvalue(), filename="expenses.xlsx")
-    await message.answer_document(document, caption="Here is your expense report")
+        file_data.seek(0)
 
-    await state.clear()
+        document = BufferedInputFile(file_data.getvalue(), filename="expenses.xlsx")
+        await message.answer_document(document, caption="Here is your expense report")
+
+        await state.clear()
+
+    else:
+
+        await message.answer("Not recording between this dates")

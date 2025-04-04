@@ -9,3 +9,7 @@ class StatementOfExpenses(StatesGroup):
 
     start_date = State()
     end_date = State()
+
+class DeleteExpenseForm(StatesGroup):
+
+    id = State()
