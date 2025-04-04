@@ -23,6 +23,7 @@ async def read_expenses(start_date: str, end_date: str, db_session: AsyncSession
     excel_file = await get_expenses(start_date, end_date, db_session)
 
     return StreamingResponse(excel_file, media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", headers={"Content-Disposition": "attachment; filename=expenses.xlsx"})
+
 @expenses.post("/")
 async def add_expense(expense: ExpenseCreate, db_session: AsyncSession = Depends(get_session)):
     db_expense = await create_expense(db_session, expense)
