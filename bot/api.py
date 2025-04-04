@@ -29,3 +29,9 @@ async def delete_expenses(endpoint, id):
         response = await session.delete(api_url+endpoint, params=id)
 
         return response
+
+async def update_expenses(endpoint, data):
+
+    async for session in init():
+
+        return await session.patch(api_url+endpoint, json=data)

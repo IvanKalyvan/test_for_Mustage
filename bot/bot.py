@@ -11,6 +11,7 @@ from routers.start import router
 from routers.create import router as create_router
 from routers.get import router as get_router
 from routers.delete import router as delete_router
+from routers.update import router as update_router
 from config import bot_key, webhook_server_host, webhook_server_port, webhook_path, webhook_secret, webhook_url
 
 storage = MemoryStorage()
@@ -20,6 +21,7 @@ dp.include_router(router)
 dp.include_router(create_router)
 dp.include_router(get_router)
 dp.include_router(delete_router)
+dp.include_router(update_router)
 
 logging.getLogger().setLevel(logging.INFO)
 logger = logging.getLogger()

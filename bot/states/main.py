@@ -13,3 +13,9 @@ class StatementOfExpenses(StatesGroup):
 class DeleteExpenseForm(StatesGroup):
 
     id = State()
+
+class ExpenseFormUpdate(StatesGroup):
+
+    id = State()
+    title = State()
+    inUAH = State()
