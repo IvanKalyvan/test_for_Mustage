@@ -1,7 +1,8 @@
 import io
 
 from aiogram import F, Router
-from aiogram.types import Message
+from aiogram.types import Message, BufferedInputFile
+from aiogram.types.input_file import BufferedInputFile
 from aiogram.fsm.context import FSMContext
 
 from api import get_expenses
@@ -26,14 +27,12 @@ async def end_expense(message: Message, state: FSMContext):
     await state.update_data(end_date=message.text)
     data_for_mailing = await state.get_data()
     response = await get_expenses("/expenses", data_for_mailing)
-    print(response)
     file_bytes = await response.read()
-    print(file_bytes)
     file_data = io.BytesIO(file_bytes)
 
     file_data.seek(0)
 
-    await message.answer("Recorded!")
-    await message.answer_document(file_data, caption="Here is your expense report")
+    document = BufferedInputFile(file_data.getvalue(), filename="expenses.xlsx")
+    await message.answer_document(document, caption="Here is your expense report")
 
     await state.clear()

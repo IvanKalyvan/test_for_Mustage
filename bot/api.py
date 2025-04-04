@@ -18,10 +18,6 @@ async def get_expenses(endpoint, data):
 
     async for session in init():
 
-        #print(data)
+        response = await session.get(api_url+endpoint, params=data)
 
-        respose = await session.get(api_url+endpoint, params=data)
-
-        print(respose)
-
-        return respose
+        return response
